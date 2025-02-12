@@ -77,5 +77,25 @@ body {
     </div>
   </div>
 
+
+  <script>
+    function checkMainSite() {
+    fetch("https://clipix.io", { mode: "no-cors" })
+        .then(() => {
+            // If the fetch succeeds, redirect back to the main site
+            if (window.location.hostname !== "clipix.io") {
+                window.location.href = "https://clipix.io";
+            }
+        })
+        .catch(() => {
+            // If the fetch fails, stay on the current page
+        });
+}
+
+// Check every 20 seconds
+setInterval(checkMainSite, 20000);
+
+  </script>
+
 </body>
 </html>
