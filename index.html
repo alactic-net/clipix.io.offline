@@ -80,11 +80,11 @@ body {
 
   <script>
     function checkMainSite() {
-    fetch("https://clipix.io", { mode: "no-cors" })
+    fetch("https://clipix.io/dashboard", { mode: "no-cors" })
         .then(() => {
             // If the fetch succeeds, redirect back to the main site
             if (window.location.hostname !== "clipix.io") {
-                window.location.href = "https://clipix.io";
+                window.location.href = "https://clipix.io/dashboard";
             }
         })
         .catch(() => {
