@@ -72,20 +72,21 @@
 
   <script>
     function checkMainSite() {
-        fetch("https://clipix.io/dashboard", { method: "HEAD" })
-            .then((response) => {
-                if (response.ok) {
-                    window.location.href = "https://clipix.io/dashboard";
-                }
-            })
-            .catch((error) => {
-                console.log("Main site is still under maintenance:", error);
-            });
-    }
+    fetch("https://clipix.io/dashboard", { method: "GET", cache: "no-store" }) // Use GET request instead
+        .then((response) => {
+            if (response.ok) {
+                window.location.href = "https://clipix.io/dashboard";
+            }
+        })
+        .catch((error) => {
+            console.log("Main site is still under maintenance:", error);
+        });
+}
 
-    // Check every 20 seconds
-    setInterval(checkMainSite, 20000);
-    checkMainSite()
+// Check every 20 seconds
+setInterval(checkMainSite, 20000);
+checkMainSite();
+
   </script>
 </body>
 </html>
