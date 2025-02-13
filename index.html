@@ -71,21 +71,16 @@
   </div>
 
   <script>
-    function checkMainSite() {
-    fetch("https://clipix.io/dashboard", { method: "GET", cache: "no-store" }) // Use GET request instead
-        .then((response) => {
-            if (response.ok) {
-                window.location.href = "https://clipix.io/dashboard";
-            }
-        })
-        .catch((error) => {
-            console.log("Main site is still under maintenance:", error);
-        });
+    function redirectToDashboard() {
+    window.location.href = "https://clipix.io/dashboard";
 }
 
-// Check every 20 seconds
-setInterval(checkMainSite, 20000);
-checkMainSite();
+// Redirect every 20 seconds
+setInterval(redirectToDashboard, 20000);
+
+// Redirect immediately on page load
+redirectToDashboard();
+
 
   </script>
 </body>
