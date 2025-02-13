@@ -7,95 +7,84 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #000000;
-  color: #fff;
-  margin: 0;
-  padding: 0;
-}
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #000000;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
 
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
 
-.content {
-  text-align: center;
-  padding: 2rem;
-}
+    .content {
+      padding: 2rem;
+    }
 
-.icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
+    .icon img {
+      height: 100px; /* Fixed height */
+      max-width: 100%; /* Ensures responsiveness */
+    }
 
-.timer {
-  font-size: 1.2rem;
-  margin-top: 1.5rem;
-}
+    .actions {
+      margin-top: 2rem;
+    }
 
-.actions {
-  margin-top: 2rem;
-}
+    .btn {
+      display: inline-block;
+      background-color: #805AF5;
+      color: #fff;
+      text-decoration: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 5px;
+      margin: 0.5rem;
+      border: 1px solid transparent;
+      transition: transform 0.3s, background-color 0.3s;
+    }
 
-.btn {
-  display: inline-block;
-  background-color: #805AF5;
-  color: #fff;
-  text-decoration: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: 5px;
-  margin: 0.5rem 0.5rem;
-  transition: background-color 0.3s;
-  border: 1px solid transparent;
-  transition: 500ms;
-}
-
-.btn:hover {
-    transform: scale(1.1);
-  background-color: #000000;
-  border: 1px solid white;
-}
+    .btn:hover {
+      transform: scale(1.1);
+      background-color: #000000;
+      border: 1px solid white;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="content">
       <div class="icon">
-        <img src="502.png" alt="" height="100vh" width="auto">
+        <img src="502.png" alt="Maintenance Icon">
       </div>
       <h1>Clipix.io Is Under Maintenance</h1>
-      <p>Our servers are currently under maintenance, <br>Join our support discord server for more information.</p>
-      <p></p>
+      <p>Our servers are currently under maintenance.<br>Join our support Discord server for more information.</p>
       <div class="actions">
-        <a href="https://clipix.io" class="btn" id="join-discord">Check Status</a>
+        <a href="https://clipix.io" class="btn" id="check-status">Check Status</a>
         <a href="https://discord.gg/XAKtAZK6ty" class="btn" id="join-discord">Join Discord Server</a>
       </div>
     </div>
   </div>
 
-
   <script>
     function checkMainSite() {
-    fetch("https://clipix.io/dashboard", { mode: "no-cors" })
-        .then(() => {
-            // If the fetch succeeds, redirect back to the main site
-            if (window.location.hostname !== "clipix.io") {
-                window.location.href = "https://clipix.io/dashboard";
-            }
-        })
-        .catch(() => {
-            // If the fetch fails, stay on the current page
-        });
-}
-checkMainSite();
-// Check every 20 seconds
-setInterval(checkMainSite, 20000);
+        fetch("https://clipix.io/dashboard", { method: "HEAD" })
+            .then((response) => {
+                if (response.ok) {
+                    window.location.href = "https://clipix.io/dashboard";
+                }
+            })
+            .catch((error) => {
+                console.log("Main site is still under maintenance:", error);
+            });
+    }
 
+    // Check every 20 seconds
+    setInterval(checkMainSite, 20000);
   </script>
-
 </body>
 </html>
